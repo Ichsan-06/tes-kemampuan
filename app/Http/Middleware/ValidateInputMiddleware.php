@@ -13,7 +13,7 @@ class ValidateInputMiddleware
         // Definisi aturan validasi
         $rules = [
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email,' . $request->user->id,
+            'email' => 'required|email|unique:users,email,' . ($request->user->id ?? 0),
             'age' => 'required|integer',
         ];
 
