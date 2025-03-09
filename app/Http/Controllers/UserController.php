@@ -3,55 +3,82 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Helpers\ResponseHelper;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
     public function index()
     {
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Success get all users',
-            'data' => User::all()
-        ]);
+        return ResponseHelper::success(
+            User::all(),
+            'Success get all users'
+        );
     }
 
     public function store(Request $request)
     {
         $user = User::create($request->all());
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Success create user',
-            'data' => $user
-        ], 201);
+        return ResponseHelper::success(
+            $user,
+            'Success create user',
+            201
+        );
     }
 
-    public function show(User $user)
+    public function show($user)
     {
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Success get user',
-            'data' => $user
-        ]);
+        $user = User::find($user);
+        if(!$user)
+        {
+            return ResponseHelper::error(
+                'User not found',
+                404
+            );
+        }
+
+        return ResponseHelper::success(
+            $user,
+            'Success get user'
+        );
     }
 
-    public function update(Request $request, User $user)
+    public function update(Request $request,$user)
     {
+        $user = User::find($user);
+
+        if(!$user)
+        {
+            return ResponseHelper::error(
+                'User not found',
+                404
+            );
+        }
+
         $user->update($request->all());
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Success update user',
-            'data' => $user
-        ]);
+        return ResponseHelper::success(
+            $user,
+            'Success update user'
+        );
     }
 
-    public function destroy(User $user)
+    public function destroy($user)
     {
+        $user = User::find($user);
+
+        if(!$user)
+        {
+            return ResponseHelper::error(
+                'User not found',
+                404
+            );
+        }
+
         $user->delete();
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Success delete user',
-            'data' => $user
-        ], 204);
+        return ResponseHelper::success(
+            $user,
+            'Success delete user',
+            204
+        );
     }
 }
