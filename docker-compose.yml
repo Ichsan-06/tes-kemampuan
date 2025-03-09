@@ -1,11 +1,11 @@
 services:
     laravel.test:
         build:
-            context: './vendor/laravel/sail/runtimes/8.4'
+            context: ./vendor/laravel/sail/runtimes/8.4
             dockerfile: Dockerfile
             args:
                 WWWGROUP: '${WWWGROUP}'
-        image: 'sail-8.4/app'
+        image: sail-8.4/app
         extra_hosts:
             - 'host.docker.internal:host-gateway'
         ports:
@@ -54,20 +54,8 @@ services:
         ports:
             - '8001:80'
         environment:
-            PMA_HOST: 'mysql'
-            MYSQL_ROOT_PASSWORD: 'root'
-            MYSQL_DATABASE: 'test'
-            MYSQL_USER: 'root'
-            MYSQL_PASSWORD: 'root'
-        networks:
-            - sail
-
-    selenium:
-        image: selenium/standalone-chromium
-        extra_hosts:
-            - 'host.docker.internal:host-gateway'
-        volumes:
-            - '/dev/shm:/dev/shm'
+            PMA_HOST: mysql
+            PMA_PORT: 3306
         networks:
             - sail
 networks:
