@@ -54,6 +54,91 @@ http://0.0.0.0:80
 ```
 
 
+
+## 🔗 Endpoint
+
+### 📋 Mendapatkan Daftar Pengguna
+- **GET** `/users`
+- **Deskripsi**: Mengambil daftar semua pengguna yang terdaftar.
+- **Response Contoh**:
+  ```json
+  [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "email": "johndoe@example.com",
+      "age": 20
+    },
+    {
+      "id": 2,
+      "name": "Jane Doe",
+      "email": "janedoe@example.com",
+      "age": 20
+    }
+  ]
+  ```
+
+### 🔍 Mendapatkan Detail Pengguna
+- **GET** `/users/:id`
+- **Deskripsi**: Mengambil data pengguna berdasarkan `id`.
+- **Response Contoh**:
+  ```json
+  {
+    "id": 1,
+    "name": "John Doe",
+    "email": "johndoe@example.com"
+  }
+  ```
+
+### ➕ Menambahkan Pengguna Baru
+- **POST** `/users`
+- **Deskripsi**: Menambahkan pengguna baru ke dalam sistem.
+- **Body Request Contoh**:
+  ```json
+  {
+    "name": "Alice Smith",
+    "email": "alice@example.com",
+    "age": 20
+  }
+  ```
+- **Response Contoh**:
+  ```json
+  {
+    "id": 3,
+    "name": "Alice Smith",
+    "email": "alice@example.com",
+    "age": 20
+  }
+  ```
+
+### ✏️ Memperbarui Data Pengguna
+- **PUT** `/users/:id`
+- **Deskripsi**: Memperbarui informasi pengguna berdasarkan `id`.
+- **Body Request Contoh**:
+  ```json
+  {
+    "name": "Alice Johnson",
+    "email": "alicejohnson@example.com",
+    "age": 21
+  }
+  ```
+- **Response Contoh**:
+  ```json
+  {
+    "message": "User updated successfully"
+  }
+  ```
+
+### ❌ Menghapus Pengguna
+- **DELETE** `/users/:id`
+- **Deskripsi**: Menghapus pengguna berdasarkan `id`.
+- **Response Contoh**:
+  ```json
+  {
+    "message": "User deleted successfully"
+  }
+  ```
+
 ## 📚 Fitur Utama
 
 ✅ CRUD (Create, Read, Update, Delete) Data
